@@ -10,13 +10,13 @@ export default class Home extends Component{
     render(){
         return (
                 <div className="Home">
-                        <h1>{this.props.title}</h1>
+                        <h1 className="title times">{this.props.title}TweedleDum</h1>
 
                         <div>
                                 <nav>
                                     <ul class="bulletDelete">
                                         <li className = "navItem">
-                                            <Link className="link" to = "/"><img className="Logo" src = {logo} alt = "logo" /></Link>
+                                            <Link className="link img" to = "/"><img className="Logo" src = {logo} alt = "logo" /></Link>
                                         </li>
                                         <li className = "navItem">
                                             <Link className="link" to = "/">Home</Link>
