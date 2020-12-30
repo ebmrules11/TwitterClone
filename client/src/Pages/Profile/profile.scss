@@ -1,0 +1,47 @@
+
+
+.leftnavBar{
+    width: 100px;
+
+    .navItem
+    {
+        margin-bottom: 60px;
+        font-size: larger;
+        font-family: cursive;
+    }
+    .bulletDelete
+    {
+        list-style-type: none;
+    }
+    
+    .link:link{
+        text-decoration: none;
+        color: lightblue;
+    }
+    .link:hover{
+        font-weight: bold;
+        color: darkblue;
+    }
+    .link:active{
+        color: lightblue;
+    }
+    //.link:visited{
+    //    color:lightblue;
+    //}
+    .img:hover{
+        -webkit-filter: drop-shadow(1px 1px 0 black)
+        drop-shadow(-1px -1px 0 black);
+        filter: drop-shadow(1px 1px 0 black) 
+        drop-shadow(-1px -1px 0 black); 
+    }
+    .Logo
+    {
+        width:50px;
+        height:50px;
+    }
+    .link
+    {
+        text-decoration: none;
+        color: blue;
+    }
+}
