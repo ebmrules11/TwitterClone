@@ -27,6 +27,9 @@ export default class Home extends Component{
                                     <li className = "navItem">
                                         <Link className="link" to = "/profile">Profile</Link>
                                     </li>
+                                    <li>
+                                        <Link className="postTest" to = "/testDB">Test Database</Link>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
