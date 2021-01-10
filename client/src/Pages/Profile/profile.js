@@ -1,4 +1,4 @@
-import './profile.scss';
+import './Profile.scss';
 import '../../components/Posts/Post.js';
 import Post from '../../components/Posts/Post.js';
 import logo from '../../Assets/Images/bird.png'
