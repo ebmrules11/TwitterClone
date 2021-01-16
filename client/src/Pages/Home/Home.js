@@ -5,6 +5,8 @@ import logo from '../../Assets/Images/bird.png'
 import { Link } from "react-router-dom";
 import React, { Component } from 'react';
 import { Button, Modal, Form } from "react-bootstrap";
+import Axios from "axios";
+
 
 
 export default class Home extends Component {
@@ -25,8 +27,19 @@ export default class Home extends Component {
     setUsername = (username) => this.setState({loginInfo: {...this.state.loginInfo, username: username }});
     setPassword = (password) => this.setState({loginInfo:  {...this.state.loginInfo, password: password }});
 
-    attemptLogin = () => {
-      console.log(this.state);
+    attemptLogin = async () => {
+      console.log(this.state.Body);
+
+      Axios.get("http://localhost:3000/api/check", 
+    {
+      username: this.state.loginInfo.username,
+      password: this.state.loginInfo.password
+    }).then(() =>
+    {
+      alert("successful insert");
+    })
+
+
       //make api call
     }
 
@@ -43,7 +56,7 @@ export default class Home extends Component {
                                 <Modal.Title>Login</Modal.Title>
                               </Modal.Header>
                               <Modal.Body>
-                                <Form>
+                                <Form action="auth" method="POST">
                                   <Form.Group controlId="formBasicEmail">
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control type="username" placeholder="Enter username" onChange={(e) => {this.setUsername(e.target.value)}}/>

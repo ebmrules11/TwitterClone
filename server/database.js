@@ -19,7 +19,7 @@ const mysql = require('mysql');
 let connection = mysql.createConnection({
   host: "34.94.168.167",
   user: "test-user",
-  database: "test",
+  database: "twitterNew",
   password: "123"
 });
 
@@ -30,5 +30,8 @@ connection.connect(function(err) {
   }
   console.log('Connected as thread id: ' + connection.threadId);
 });
+
+
+
 
 module.exports = connection;
