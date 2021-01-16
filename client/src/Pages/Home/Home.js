@@ -17,7 +17,8 @@ export default class Home extends Component {
          loginInfo: {
            username: "",
            password: ""
-         }
+         },
+         isAutheticated: false
       };
     }
 
@@ -28,16 +29,20 @@ export default class Home extends Component {
     setPassword = (password) => this.setState({loginInfo:  {...this.state.loginInfo, password: password }});
 
     attemptLogin = async () => {
-      console.log(this.state.Body);
+      console.log(this.state);
 
-      Axios.get("http://localhost:3000/api/check", 
-    {
-      username: this.state.loginInfo.username,
-      password: this.state.loginInfo.password
-    }).then(() =>
-    {
-      alert("successful insert");
-    })
+      Axios.post("http://localhost:3000/api/auth",{
+        username: this.state.loginInfo.username,
+        password: this.state.loginInfo.password
+      }).then((res) =>
+      {
+        this.setState({isAutheticated: res.data});
+        if (this.state.isAutheticated) {
+          console.log(this.state.isAutheticated);
+        } else {
+          console.log(this.state.isAutheticated);
+        }
+      })
 
 
       //make api call

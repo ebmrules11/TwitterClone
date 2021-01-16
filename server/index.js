@@ -5,6 +5,8 @@ const app = express();
 const cors = require("cors");
 const connection = require('./database');
 const bodyParser = require('body-parser');
+var session = require('express-session');
+
 
 // app.route('/books/:userId')
 //   .get(function(req, res, next) {
@@ -14,7 +16,7 @@ const bodyParser = require('body-parser');
 //       function(error, results, fields) {
 //         if (error) throw error;
 //         res.json(results);
-        
+
 //       }
 //     );
 //   });
@@ -29,46 +31,51 @@ app.use(cors());
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json());
-app.get("/api/check",  (req, res) => {
+
+
+app.post("/api/auth",  (req, res) => {
 
   console.log(req.body);
 
-  const username = req.body.username
-  const password = req.body.password
-  console.log(username + password)
-  var isauthenticated = false
+  const username = req.body.username;
+  const password = req.body.password;
+  console.log(username + password);
+  var isauthenticated = false;
   const sqlChecker = "SELECT * "+
                       "FROM users "+
-                      "WHERE uniqueName = ? AND password = ?"
+                      "WHERE uniqueName = ? AND password = ?";
 
-  connection.query(sqlChecker, [username, password], function (err, result){
-
+  connection.query(sqlChecker, [username, password], function (err, result) {
     if(err) console.log(err);
-    else{
-      console.log("this shit worked bruh");
-      isauthenticated = true;
+    else {
+      const isAuthenticated = (result.length > 0)?true:false;
+      if (isAuthenticated) {
+        req.session.loggedIn = true;
+        req.session.username = username;
+        //res.redirect("/");
+      }
+      res.send(isAuthenticated);
     }
-  })
-  res.send(isauthenticated);
+  });
 
 })
 
 
 
 // app.post("/api/insert", (req, res)=> {
-//   console.log("bruh");
+//   consolelog("bruh");
 //   console.log(req.body);
 //   console.log(typeof req.body);
 //   const id = req.body.id
 //   const bookTitle = req.body.bookTitle
 //   const userId = req.body.userId
 
-  
+
 //   const sqlInsert = "INSERT INTO users (id, bookTitle, userID) VALUES (?,?,?)"
 //   connection.query(sqlInsert, [id, bookTitle, userId], (err, result) => {
 //     console.log(err);
 //   })
-  
+
 
 // });
 
@@ -79,9 +86,8 @@ app.get('/status', (req, res) => {
 // Port 8080 for Google App Engine
 //app.set('port', process.env.PORT || 3000);
 // app.use("*",  (req, res) => {
- 
+
 //   res.sendFile(path.join(__dirname, "../public/index.html"))
 // });
 
 app.listen(3000);
-
